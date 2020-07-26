@@ -1045,7 +1045,7 @@ Options = Option_Group( '',
 		Option( 'mpi_filebuf_jobdistributor', 'Boolean', desc='same as mpi_file_buf_job_distributor but with more intuitive spacing... determine if we should use the MPIFileBufJobDistributor (warning: silent output only)', default='true' ),
 
 		#this is unnecessary and unsafe, use the the faster mpi_filebuf_jobdistributor instead
-		Option( 'mpi_fast_nonblocking_output', 'Boolean', desc='By default the master node blocks while a slave node outputs to avoid two slaves writing to a score file or silent file at the same time setting this to true disables that feature', default='false' ),
+		Option( 'mpi_fast_nonblocking_output', 'Boolean', desc='By default the main node blocks while a subordinate node outputs to avoid two subordinates writing to a score file or silent file at the same time setting this to true disables that feature', default='false' ),
 
 
 		Option( 'dd_parser', 'Boolean', desc='determine whether to use the dock_design_parser', default='false' ),
@@ -2628,8 +2628,8 @@ EX_SIX_QUARTER_STEP_STDDEVS   7          +/- 0.25, 0.5, 0.75, 1, 1.25 & 1.5 sd; 
 	), # phil
 
 	Option_Group( 'wum',
-		Option( 'n_slaves_per_master', 'Integer', default='64' , desc = 'A value between 32 and 128 is usually recommended' ),
-		Option( 'n_masters', 'Integer', default='1' , desc = 'Manual override for -n_slaves_per_master. How many master nodes should be spawned ? 1 by default. generall 1 for eery 256-512 cores is recommended depending on master workload' ),
+		Option( 'n_subordinates_per_main', 'Integer', default='64' , desc = 'A value between 32 and 128 is usually recommended' ),
+		Option( 'n_mains', 'Integer', default='1' , desc = 'Manual override for -n_subordinates_per_main. How many main nodes should be spawned ? 1 by default. generall 1 for eery 256-512 cores is recommended depending on main workload' ),
 		Option( 'memory_limit', 'Integer', default = '0', desc = 'Memory limit for queues (in kB) ' ),
 
 		Option( 'extra_scorefxn', 'String', desc='Extra score function for post-batchrelax-rescoring' ),
@@ -2662,7 +2662,7 @@ EX_SIX_QUARTER_STEP_STDDEVS   7          +/- 0.25, 0.5, 0.75, 1, 1.25 & 1.5 sd; 
 		Option( 'max_emperor_lib_round', 'Integer', default = '0' ),
 		Option( 'library_expiry_time', 'Integer', default = '2400' ),
 		Option( 'objective_function', 'String', desc = 'What to use as the objective function', default='score' ),
-		Option( 'expire_after_rounds', 'Integer', desc = 'If set to > 0 this causes the Master to expire a structure after it has gone through this many cycles', default='0' ),
+		Option( 'expire_after_rounds', 'Integer', desc = 'If set to > 0 this causes the Main to expire a structure after it has gone through this many cycles', default='0' ),
 		Option( 'mpi_resume', 'String', desc = 'Prefix (Ident string) for resuming a previous job!'),
 		Option( 'mpi_feedback',  'String', default = 'no',
 			legal=['no','add_n_limit','add_n_replace', 'single_replace', 'single_replace_rounds' ], ),
@@ -2672,7 +2672,7 @@ EX_SIX_QUARTER_STEP_STDDEVS   7          +/- 0.25, 0.5, 0.75, 1, 1.25 & 1.5 sd; 
 		Option( 'mpi_loophash_split_size    ', 'Integer', default='50' ),
 		Option( 'mpi_metropolis_temp', 'Real', default='1000000.0' ),
 		Option( 'mpi_save_state_interval', 'Integer', default='1200' ),
-		Option( 'mpi_master_save_score_only',  'Boolean', default = 'true' ),
+		Option( 'mpi_main_save_score_only',  'Boolean', default = 'true' ),
 		Option( 'max_loophash_per_structure', 'Integer', default='1' ),
 		Option( 'rms_limit', 'Real', default='2.0', desc = 'How to deal with returned relaxed structures' ),
 		Option( 'centroid_only',     'Boolean', default = 'false', desc = 'false' ),
